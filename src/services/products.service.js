@@ -22,6 +22,10 @@ export async function getProductById(productId) {
 
   const productSnapshot = await getDoc(productDocument);
 
+  if (!productSnapshot.exists()) {
+    throw new Error("Producto no encontrado");
+  }
+
   return {
     id: productSnapshot.id,
     ...productSnapshot.data(),

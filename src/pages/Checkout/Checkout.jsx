@@ -3,18 +3,34 @@ import styles from "./Checkout.module.css";
 import { createSell } from "../../services/products.service";
 import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import {
+  showPurchaseError,
+  showPurchaseSuccess,
+} from "../../utils/alerts";
 
 const Checkout = () => {
-  const [form, setForm] = useState();
+  const [form, setForm] = useState({});
   const [created, setCreated] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { cart, totalPrice } = useCart();
+  const { cart, totalPrice, clearCart } = useCart();
 
   const handleChange = ({ target }) =>
     setForm((current) => ({ ...current, [target.name]: target.value }));
 
   const navigate = useNavigate();
+
+  if (!cart.length) {
+    return (
+      <section className={styles.empty}>
+        <span>Tu bolsa está vacía</span>
+        <h1>Agregá productos antes de comprar.</h1>
+        <button type="button" onClick={() => navigate("/")}>
+          Explorar colección
+        </button>
+      </section>
+    );
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,19 +52,20 @@ const Checkout = () => {
       createdAt: new Date(),
     };
 
-    createSell(newSell)
-      .then(() => {
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-    setError("");
-    setCreated(null);
-    setLoading(false);
+    try {
+      const order = await createSell(newSell);
+      setError("");
+      setCreated(order);
+      setLoading(false);
+      await showPurchaseSuccess(order?.id);
+      clearCart();
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      setError("No pudimos procesar la compra.");
+      setLoading(false);
+      showPurchaseError();
+    }
   };
   return (
     <section className={styles.page}>

@@ -1,20 +1,21 @@
 .hero {
-    min-height: 360px;
-    border-radius: 26px;
-    padding: 55px;
+    min-height: 430px;
+    border-radius: 4px;
+    padding: 58px;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 1.3fr .7fr;
+    grid-template-columns: 1.1fr .9fr;
     align-items: center;
     gap: 35px;
     text-align: left;
     color: white;
-    background: linear-gradient(120deg, #111827, #312e81 60%, #7c3aed);
+    background: #172121;
+    box-shadow: 14px 14px 0 #dcefe8;
     overflow: hidden;
 }
 
 .eyebrow {
-    color: #c4b5fd;
+    color: #ffb39f;
     text-transform: uppercase;
     font-size: .78rem;
     letter-spacing: .12em;
@@ -24,14 +25,14 @@
 .hero h1 {
     color: white;
     max-width: 600px;
-    font-size: clamp(2.5rem, 6vw, 4.8rem);
+    font-size: clamp(2.5rem, 6vw, 5.4rem);
     line-height: .98;
-    letter-spacing: -.055em;
+    letter-spacing: 0;
     margin: 15px 0;
 }
 
 .hero p {
-    color: #ddd6fe;
+    color: #c9d8d1;
     max-width: 530px;
     font-size: 1.05rem;
 }
@@ -40,39 +41,44 @@
     display: inline-block;
     margin-top: 26px;
     padding: 13px 20px;
-    color: #312e81;
-    background: white;
-    border-radius: 11px;
+    color: #172121;
+    background: #ffb39f;
+    border-radius: 2px;
     text-decoration: none;
     font-weight: 800;
 }
 
 .visual {
-    width: 210px;
-    aspect-ratio: 1;
+    width: min(100%, 310px);
+    aspect-ratio: 1.05;
     justify-self: center;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, .3);
-    background: rgba(255, 255, 255, .1);
+    border-radius: 0;
+    border: 1px solid #ffb39f;
+    background: #e9573b;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transform: rotate(7deg);
-    box-shadow: 0 0 0 30px rgba(255, 255, 255, .04);
+    transform: rotate(3deg);
+    box-shadow: 16px 16px 0 #38534c, 30px 30px 0 #223531;
 }
 
 .visual span {
     font-size: .8rem;
-    letter-spacing: .3em;
+    letter-spacing: .16em;
+    color: #172121;
 }
 
 .visual strong {
-    font-size: 2.2rem;
+    color: #172121;
+    font-size: 2.35rem;
+    line-height: .95;
+    text-align: center;
 }
 
 .visual small {
-    color: #ddd6fe;
+    color: #172121;
+    font-weight: 700;
 }
 
 .catalog {
@@ -89,7 +95,7 @@
 }
 
 .heading span {
-    color: #7c3aed;
+    color: #e9573b;
     font-size: .78rem;
     text-transform: uppercase;
     font-weight: 800;
@@ -102,7 +108,7 @@
 }
 
 .heading p {
-    color: #6b7280;
+    color: #53625f;
 }
 
 @media(max-width:700px) {
@@ -112,7 +118,9 @@
     }
 
     .visual {
-        display: none
+        width: 220px;
+        display: flex;
+        justify-self: end;
     }
 
     .heading p {

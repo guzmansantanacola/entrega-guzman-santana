@@ -1,21 +1,21 @@
 .grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 22px;
+    gap: 18px;
 }
 
 .message,
 .error {
     padding: 50px;
     text-align: center;
-    border-radius: 18px;
-    background: white;
-    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    background: #fffdf8;
+    border: 1px solid #d7ded8;
 }
 
 .error {
-    color: #b91c1c;
-    background: #fef2f2;
+    color: #a53e2c;
+    background: #fff0eb;
 }
 
 @media (max-width: 960px) {

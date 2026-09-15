@@ -1,0 +1,35 @@
+.page {
+    text-align: left;
+}
+
+.heading {
+    margin-bottom: 28px;
+    border-bottom: 1px solid #d7ded8;
+    padding-bottom: 24px;
+}
+
+.heading span {
+    color: #e9573b;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.heading h1 {
+    margin: 8px 0 6px;
+    font-size: 3rem;
+}
+
+.heading p {
+    margin: 0;
+    color: #6b7974;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 22px;
+    color: #e9573b;
+    font-weight: 800;
+    text-decoration: none;
+}

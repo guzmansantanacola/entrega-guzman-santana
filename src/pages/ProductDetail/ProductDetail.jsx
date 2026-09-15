@@ -1,12 +1,25 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import styles from "./ProductDetail.module.css";
 import { useProduct } from "../../hooks/useProduct";
+import { showAddedAlert, showStockError } from "../../utils/alerts";
+import ItemCount from "../../components/ItemCount/ItemCount";
 
 const ProductDetail = () => {
   const { productId } = useParams();
   const { addToCart } = useCart();
   const { product, isLoading, error } = useProduct(productId);
+  const [added, setAdded] = useState(false);
+  const handleAddToCart = (quantity) => {
+    const addedToCart = addToCart(product, quantity);
+    if (!addedToCart) {
+      showStockError(product.stock);
+      return;
+    }
+    setAdded(true);
+    showAddedAlert(product.title);
+  };
   if (isLoading) {
     return <div className={styles.state}>Cargando detalle...</div>;
   }
@@ -31,6 +44,7 @@ const ProductDetail = () => {
       </div>
       <article className={styles.detail}>
         <section className={styles.gallery}>
+          <span className={styles.galleryLabel}>Lumen essentials</span>
           <span className={styles.discount}>
             -{Math.round(product.discountPercentage)}%
           </span>
@@ -40,6 +54,7 @@ const ProductDetail = () => {
           />
         </section>
         <section className={styles.info}>
+          <span className={styles.productTag}>{product.category}</span>
           <span className={styles.condition}>
             Nuevo · {product.stock} disponibles
           </span>
@@ -74,13 +89,17 @@ const ProductDetail = () => {
           <p className={styles.description}>{product.description}</p>
         </section>
         <aside className={styles.buyBox}>
+          <span className={styles.buyLabel}>Disponible para vos</span>
           <p className={styles.free}>Envío gratis</p>
           <strong>Recibilo entre 3 y 5 días</strong>
-          <p>Stock disponible</p>
-          <small>
-            Podés comprar hasta {Math.min(product.stock, 10)} unidades.
-          </small>
-          <button onClick={() => addToCart(product)}>Agregar al carrito</button>
+          <p className={styles.stock}><span /> Stock disponible</p>
+          {!added ? (
+            <ItemCount stock={product.stock} onAdd={handleAddToCart} />
+          ) : (
+            <Link className={styles.viewCart} to="/carrito">
+              Ver mi bolsa
+            </Link>
+          )}
           <div className={styles.protection}>
             <span>✓</span>
             <p>

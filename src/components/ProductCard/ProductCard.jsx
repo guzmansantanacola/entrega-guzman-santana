@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import styles from "./ProductCard.module.css";
+import { showAddedAlert, showStockError } from "../../utils/alerts";
+import ItemCount from "../ItemCount/ItemCount";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
+  const handleAddToCart = (quantity) => {
+    const added = addToCart(product, quantity);
+    if (added) showAddedAlert(product.title);
+    else showStockError(product.stock);
+  };
+
   return (
     <article className={styles.card}>
       <Link to={`/productos/${product.id}`} className={styles.imageLink}>
@@ -20,9 +28,7 @@ const ProductCard = ({ product }) => {
         </div>
         <p className={styles.price}>US$ {product.price.toFixed(2)}</p>
         <p className={styles.shipping}>Envío gratis</p>
-        <button type="button" onClick={() => addToCart(product)}>
-          Agregar al carrito
-        </button>
+        <ItemCount stock={product.stock} onAdd={handleAddToCart} />
       </div>
     </article>
   );

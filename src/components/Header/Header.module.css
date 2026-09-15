@@ -1,69 +1,112 @@
 .header {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    inset: 0 auto 0 0;
     z-index: 10;
-    background: rgba(255, 255, 255, .94);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid #e5e7eb;
+    width: 250px;
+    background: #172121;
+    color: #f6f1e8;
+    border-right: 1px solid #38534c;
 }
 
 .nav {
-    width: min(1180px, calc(100% - 32px));
-    min-height: 72px;
-    margin: auto;
+    min-height: 100vh;
+    padding: 34px 26px 26px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 .brand {
     display: flex;
     gap: 9px;
     align-items: center;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: 800;
-    color: #111827;
+    color: #f6f1e8;
     text-decoration: none;
 }
 
 .brand span {
-    color: #6d28d9;
-    font-size: 1.5rem;
+    color: #ff6b4a;
+    font-size: 1.75rem;
+}
+
+.tagline {
+    color: #9db0a8;
+    font-size: .78rem;
+    line-height: 1.4;
+    margin: 9px 0 58px;
+}
+
+.sectionLabel {
+    color: #78988c;
+    font-size: .65rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    margin-bottom: 12px;
+    text-transform: uppercase;
 }
 
 .links {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
     gap: 8px;
 }
 
 .link {
-    color: #4b5563;
+    display: flex;
+    align-items: center;
+    color: #b6c8c3;
     text-decoration: none;
     font-size: .92rem;
     font-weight: 650;
-    padding: 10px 13px;
-    border-radius: 10px;
+    padding: 13px 14px;
+    border-radius: 2px;
+}
+
+.icon {
+    width: 28px;
+    color: #ffb39f;
+    font-size: .85rem;
+}
+
+.categoryLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 24px;
+    padding-left: 28px;
+}
+
+.categoryLinks a {
+    color: #9db0a8;
+    font-size: .78rem;
+    text-decoration: none;
+}
+
+.categoryLinks a:hover,
+.categoryLinks a.active {
+    color: #ffb39f;
 }
 
 .link:hover,
 .active {
-    color: #6d28d9;
-    background: #f5f3ff;
+    color: #172121;
+    background: #ffb39f;
 }
 
 .cart {
     display: flex;
     align-items: center;
     gap: 7px;
-    background: #111827;
-    color: white;
+    background: #38534c;
+    color: #f6f1e8;
 }
 
 .cart:hover {
-    background: #6d28d9;
-    color: white;
+    background: #ffb39f;
+    color: #172121;
 }
 
 .badge {
@@ -72,20 +115,80 @@
     display: grid;
     place-items: center;
     border-radius: 999px;
-    background: #f97316;
-    color: white;
+    background: #172121;
+    color: #f6f1e8;
     font-size: .72rem;
 }
 
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    color: #9db0a8;
+    font-size: .75rem;
+    margin-bottom: 24px;
+}
+
+.details b {
+    color: #9ed5bf;
+    font-size: .85rem;
+    margin-right: 7px;
+}
+
+.note {
+    margin-top: 0;
+    padding: 17px 14px;
+    border-top: 1px solid #38534c;
+    border-bottom: 1px solid #38534c;
+}
+
+.sidebarBottom {
+    margin-top: auto;
+}
+
+.note span {
+    display: block;
+    color: #ffb39f;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    margin-bottom: 10px;
+}
+
+.note strong {
+    font-size: .94rem;
+    line-height: 1.35;
+}
+
+.copyright {
+    color: #78988c;
+    font-size: .7rem;
+    letter-spacing: .08em;
+    margin-top: 18px;
+    text-transform: uppercase;
+}
+
 @media (max-width: 650px) {
+    .header {
+        position: sticky;
+        width: 100%;
+        border-right: 0;
+        border-bottom: 1px solid #38534c;
+    }
+
     .nav {
-        padding: 12px 0;
-        align-items: flex-start;
+        min-height: auto;
+        padding: 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+        position: relative;
     }
 
     .links {
-        flex-wrap: wrap;
+        flex-direction: row;
         justify-content: flex-end;
+        margin-left: auto;
     }
 
     .link {
@@ -93,7 +196,29 @@
         padding: 8px;
     }
 
-    .brand {
-        margin-top: 6px;
+    .tagline,
+    .sectionLabel,
+    .sidebarBottom,
+    .categoryLinks {
+        display: none;
+    }
+
+    .categoryLinks {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 18px;
+        overflow-x: auto;
+        margin: 0;
+        padding: 10px 16px;
+        background: #172121;
+        border-top: 1px solid #38534c;
+    }
+
+    .categoryLinks a {
+        flex: 0 0 auto;
     }
 }

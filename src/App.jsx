@@ -5,6 +5,7 @@ import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Checkout from "./pages/Checkout/Checkout";
 import Cart from "./pages/Cart/Cart";
 import NotFound from "./pages/NotFound/NotFound";
+import Category from "./pages/Category/Category";
 
 const App = () => (
   <Routes>
@@ -12,6 +13,7 @@ const App = () => (
       <Route index element={<Home />} />
       <Route path="checkout" element={<Checkout />} />
       <Route path="productos/:productId" element={<ProductDetail />} />
+      <Route path="categoria/:category" element={<Category />} />
       <Route path="carrito" element={<Cart />} />
       <Route path="*" element={<NotFound />} />
     </Route>

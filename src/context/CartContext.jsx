@@ -7,17 +7,25 @@ export const CartProvider = ({ children }) => {
 
   const [cart, setCart] = useState([]);
 
-  const addToCart = (product) =>
-    setCart((current) => {
-      const item = current.find(({ id }) => id === product.id);
-      return item
+  const addToCart = (product, quantity = 1) => {
+    const item = cart.find(({ id }) => id === product.id);
+    const currentQuantity = item?.quantity || 0;
+
+    if (!product.stock || quantity < 1 || currentQuantity + quantity > product.stock) {
+      return false;
+    }
+
+    setCart((current) =>
+      item
         ? current.map((entry) =>
             entry.id === product.id
-              ? { ...entry, quantity: entry.quantity + 1 }
+              ? { ...entry, quantity: entry.quantity + quantity }
               : entry,
           )
-        : [...current, { ...product, quantity: 1 }];
-    });
+        : [...current, { ...product, quantity }],
+    );
+    return true;
+  };
 
   const removeFromCart = (productId) =>
     setCart((current) => current.filter(({ id }) => id !== productId));
@@ -27,7 +35,9 @@ export const CartProvider = ({ children }) => {
     if (quantity < 1) return removeFromCart(productId);
     setCart((current) =>
       current.map((item) =>
-        item.id === productId ? { ...item, quantity } : item,
+        item.id === productId
+          ? { ...item, quantity: Math.min(quantity, item.stock) }
+          : item,
       ),
     );
   };

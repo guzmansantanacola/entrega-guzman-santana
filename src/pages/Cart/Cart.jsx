@@ -17,7 +17,7 @@ const Cart = () => {
   if (!cart.length)
     return (
       <section className={styles.empty}>
-        <span>🛒</span>
+        <span aria-hidden="true">Bag</span>
         <h1>Tu carrito está vacío</h1>
         <p>Sumá productos y aparecerán acá.</p>
         <Link to="/">Explorar productos</Link>
