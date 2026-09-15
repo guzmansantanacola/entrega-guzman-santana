@@ -54,6 +54,8 @@ jobs:
           EOF
 
       - name: Build
+        env:
+          VITE_BASE_PATH: /entrega-guzman-santana/
         run: npm run build
 
       - name: Support SPA routes

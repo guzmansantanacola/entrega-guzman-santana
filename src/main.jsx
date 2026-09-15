@@ -7,7 +7,7 @@ import App from "./App";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter basename="/entrega-guzman-santana">
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <CartProvider>
         <App />
       </CartProvider>
